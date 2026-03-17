@@ -7,8 +7,8 @@ interface ComposePanelProps {
   message: string;
   setMessage: React.Dispatch<React.SetStateAction<string>>;
   isLoading: boolean;
-  provider: 'groq' | 'claude' | 'gemini';
-  setProvider: React.Dispatch<React.SetStateAction<'groq' | 'claude' | 'gemini'>>;
+  provider: 'groq' | 'claude' | 'gemini' | 'mistral';
+  setProvider: React.Dispatch<React.SetStateAction<'groq' | 'claude' | 'gemini' | 'mistral'>>;
   onGenerate: () => void;
   showNotification: (text: string, type: 'success' | 'error') => void;
 }
@@ -108,10 +108,10 @@ const ComposePanel: React.FC<ComposePanelProps> = ({
       <div className="bg-[#161b22] border border-[rgba(255,255,255,0.08)] rounded-2xl p-4 md:p-6 lg:p-8 flex flex-col gap-6 w-full shadow-lg">
         
         {/* Provider Toggle */}
-        <div className="grid grid-cols-3 bg-[#21262d] rounded-xl p-1 border border-white/5 w-full">
+        <div className="grid grid-cols-2 md:grid-cols-4 bg-[#21262d] rounded-xl p-1 border border-white/5 w-full gap-1">
           <button
             onClick={() => setProvider('groq')}
-            className={`flex-1 py-2.5 px-3 rounded-lg text-sm font-semibold transition-all min-h-[44px] ${
+            className={`py-2 px-3 rounded-lg text-xs md:text-sm font-semibold transition-all min-h-[44px] ${
               provider === 'groq' 
                 ? 'bg-wa-green text-[#0d1117] shadow-sm' 
                 : 'text-text-muted hover:text-white hover:bg-white/5'
@@ -121,7 +121,7 @@ const ComposePanel: React.FC<ComposePanelProps> = ({
           </button>
           <button
              onClick={() => setProvider('claude')}
-             className={`flex-1 py-2.5 px-3 rounded-lg text-sm font-semibold transition-all min-h-[44px] ${
+             className={`py-2 px-3 rounded-lg text-xs md:text-sm font-semibold transition-all min-h-[44px] ${
                provider === 'claude' 
                  ? 'bg-wa-green text-[#0d1117] shadow-sm' 
                  : 'text-text-muted hover:text-white hover:bg-white/5'
@@ -131,13 +131,23 @@ const ComposePanel: React.FC<ComposePanelProps> = ({
           </button>
           <button
              onClick={() => setProvider('gemini')}
-             className={`flex-1 py-2.5 px-3 rounded-lg text-sm font-semibold transition-all min-h-[44px] ${
+             className={`py-2 px-3 rounded-lg text-xs md:text-sm font-semibold transition-all min-h-[44px] ${
                provider === 'gemini' 
                  ? 'bg-wa-green text-[#0d1117] shadow-sm' 
                  : 'text-text-muted hover:text-white hover:bg-white/5'
              }`}
           >
             Gemini
+          </button>
+          <button
+             onClick={() => setProvider('mistral')}
+             className={`py-2 px-3 rounded-lg text-xs md:text-sm font-semibold transition-all min-h-[44px] ${
+               provider === 'mistral' 
+                 ? 'bg-wa-green text-[#0d1117] shadow-sm' 
+                 : 'text-text-muted hover:text-white hover:bg-white/5'
+             }`}
+          >
+            Mistral
           </button>
         </div>
 

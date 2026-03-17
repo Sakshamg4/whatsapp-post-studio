@@ -9,7 +9,7 @@ function App() {
   const [message, setMessage] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [notification, setNotification] = useState<{ text: string, type: 'success' | 'error' } | null>(null)
-  const [provider, setProvider] = useState<'groq' | 'claude' | 'gemini'>('groq')
+  const [provider, setProvider] = useState<'groq' | 'claude' | 'gemini' | 'mistral'>('groq')
   
   const [formData, setFormData] = useState({
     rawContent: '',

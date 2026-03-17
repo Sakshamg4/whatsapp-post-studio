@@ -1,6 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const { GoogleGenerativeAI } = require("@google/generative-ai");
+const { Mistral } = require('@mistralai/mistralai');
 const router = express.Router();
 
 router.post('/', async (req, res) => {
@@ -93,6 +94,16 @@ Rules:
       const result = await model.generateContent(fullPrompt);
       const response = await result.response;
       generatedMessage = response.text().trim();
+    } else if (provider === 'mistral') {
+      const client = new Mistral({ apiKey: process.env.MISTRAL_API_KEY });
+      const response = await client.chat.complete({
+        model: 'mistral-large-latest',
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: userPrompt }
+        ]
+      });
+      generatedMessage = response.choices[0].message.content.trim();
     } else {
       const response = await axios.post(
         'https://api.groq.com/openai/v1/chat/completions',
