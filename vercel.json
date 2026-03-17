@@ -19,9 +19,11 @@
       "dest": "server/index.js"
     },
     {
+      "handle": "filesystem"
+    },
+    {
       "src": "/(.*)",
-      "dest": "client/$1",
-      "continue": true
+      "dest": "/index.html"
     }
   ]
 }
