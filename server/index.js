@@ -11,6 +11,10 @@ app.use(express.json());
 const generateRoute = require('./routes/generate');
 app.use('/api/generate', generateRoute);
 
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
+  });
+}
+
+module.exports = app;
